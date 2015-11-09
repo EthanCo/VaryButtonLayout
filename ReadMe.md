@@ -232,7 +232,7 @@ VaryButtonLayout的每一个子View，都是一种状态，而子view可以是�
     </com.ethanco.varybuttondemo.VaryButtonLayout>
 
 ### 使用include ###
-- 若VaryButtonLayout中只有一个子布局(为了方便，成为AView)，并且AView是一个ViewGroup，那么，就会去AView中再去寻找子View，以AView中的子View来添加状态
+- 若VaryButtonLayout中只有一个子布局(为了方便，称作AView)，并且AView是一个ViewGroup，那么，就会去AView中再去寻找子View，以AView中的子View来添加状态
 	- 所以，可以使用include，来简化单个XML的代码，并且使子View可复用
 
 新建include_ignorelayout_1.xml
