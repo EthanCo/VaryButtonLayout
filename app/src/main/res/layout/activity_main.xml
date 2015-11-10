@@ -211,13 +211,14 @@
         android:layout_width="100dp"
         android:layout_height="100dp">
 
-        <include layout="@layout/include_ignorelayout_1"></include>
+        <include layout="@layout/include_statuslayout"></include>
     </com.ethanco.varybuttondemo.VaryButtonLayout>
 
     <com.ethanco.varybuttondemo.VaryButtonLayout
+        android:id="@+id/varyButton3"
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
-        <include layout="@layout/include_ignorelayout_1"></include>
+        <include layout="@layout/include_statuslayout"></include>
     </com.ethanco.varybuttondemo.VaryButtonLayout>
 </LinearLayout>

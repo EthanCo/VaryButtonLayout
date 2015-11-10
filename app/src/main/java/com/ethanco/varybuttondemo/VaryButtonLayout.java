@@ -11,12 +11,19 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 /**
- * 具有多种状态的Layout
+ * 具有多种状态的Button
+ * <p/>
  * Created by YOLANDA on 2015-11-09.
  */
 public class VaryButtonLayout extends RelativeLayout implements View.OnClickListener {
 
+    /**
+     * 现在的状态
+     */
     int currIndex = 0;
+    /**
+     * 是否只有一个子View(如果只有一个子View，会从该子View中再去寻找子View)
+     */
     private boolean isOneChildView;
 
     public VaryButtonLayout(Context context) {
@@ -47,7 +54,6 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
             throw new IndexOutOfBoundsException("length=" + getChildCount() + "; index=" + currIndex);
         }
         this.currIndex = currIndex;
-        this.isOneChildView = false;
         setCurrViewVisible();
     }
 
@@ -78,11 +84,10 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        int childCount = getChildCount();
-        if (childCount == 1 && getChildAt(0) instanceof ViewGroup) {
+        if (getChildCount() == 1 && getChildAt(0) instanceof ViewGroup) {
             isOneChildView = true;
-            ViewGroup viewGroup = (ViewGroup) getChildAt(0);
-            initChildView(viewGroup, widthMeasureSpec, heightMeasureSpec);
+            ViewGroup childViewGroup = (ViewGroup) getChildAt(0);
+            initChildView(childViewGroup, widthMeasureSpec, heightMeasureSpec);
         } else {
             initChildView(this, widthMeasureSpec, heightMeasureSpec);
         }
@@ -136,6 +141,7 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
                 layoutParams.height = specHeight;
             }
         }
+        childView.setLayoutParams(layoutParams);
     }
 
     @Override
@@ -146,9 +152,12 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
     @Override
     public void onClick(View v) {
         Log.i("VaryButton", "2015-11-09-onClick: onCLick");
+        int originalIndex = currIndex;
         setCurrViewVisible();
 
-        mVarayClickListener.onClick(this, currIndex);
+        if (mVarayClickListener != null) {
+            mVarayClickListener.onClick(this, originalIndex, currIndex);
+        }
     }
 
     /**
@@ -170,24 +179,20 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
      */
     private int circulateIndex(int maxIndex) {
         currIndex++;
-        if (currIndex >= maxIndex)
+        if (currIndex >= maxIndex) {
             currIndex = 0;
+        }
         return currIndex;
     }
 
     public interface OnVaryClickListener {
-        void onClick(View v, int currIndex);
-
+        void onClick(View v, int currIndex, int nextIndex);
     }
 
     public void setOnVarayClickListener(OnVaryClickListener varyClickListener) {
         this.mVarayClickListener = varyClickListener;
     }
 
-    public OnVaryClickListener mVarayClickListener = new OnVaryClickListener() {
-        @Override
-        public void onClick(View v, int currIndex) {
+    public OnVaryClickListener mVarayClickListener;
 
-        }
-    };
 }

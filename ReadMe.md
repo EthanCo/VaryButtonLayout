@@ -44,12 +44,12 @@
     varyButton1.addStatusView(new ImageView(this));
 ### 设置点击监听 ###
  	
-    varyButton1.setOnVarayClickListener(new VaryButtonLayout.OnVaryClickListener() { // 回调监听
-        @Override
-        public void onClick(View v, int currIndex) {
-            Toast.makeText(getApplicationContext(), "currIndex:" + currIndex, Toast.LENGTH_SHORT).show();
-        }
-    });
+    varyButton1.setOnVarayClickListener(new VaryButtonLayout.OnVaryClickListener() {
+	    @Override
+	    public void onClick(View v, int currIndex, int nextIndex) {
+	        Toast.makeText(getApplicationContext(), "currIndex:" + currIndex + " nextIndex" + nextIndex, Toast.LENGTH_SHORT).show();
+	    }
+	});
 
 ### 设置现在的状态 ###
     varyButton1.setCurrSatus(2); //设置当前所处状态
@@ -235,7 +235,7 @@ VaryButtonLayout的每一个子View，都是一种状态，而子view可以是�
 - 若VaryButtonLayout中只有一个子布局(为了方便，称作AView)，并且AView是一个ViewGroup，那么，就会去AView中再去寻找子View，以AView中的子View来添加状态
 	- 所以，可以使用include，来简化单个XML的代码，并且使子View可复用
 
-新建include_ignorelayout_1.xml
+新建include_statuslayout.xml
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -269,23 +269,23 @@ VaryButtonLayout的每一个子View，都是一种状态，而子view可以是�
         android:layout_width="100dp"
         android:layout_height="100dp">
 
-        <include layout="@layout/include_ignorelayout_1"></include>
+        <include layout="@layout/include_statuslayout"></include>
     </com.ethanco.varybuttondemo.VaryButtonLayout>
 
-然后，还可以重用include_ignorelayout_1.xml  
+然后，还可以重用include_statuslayout.xml  
 比如，Activity中需要有两个相同状态的VaryButtonLayout
 
 	 <com.ethanco.varybuttondemo.VaryButtonLayout
         android:layout_width="100dp"
         android:layout_height="100dp">
 
-        <include layout="@layout/include_ignorelayout_1"></include>
+        <include layout="@layout/include_statuslayout"></include>
     </com.ethanco.varybuttondemo.VaryButtonLayout>
 
 	<com.ethanco.varybuttondemo.VaryButtonLayout
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
-        <include layout="@layout/include_ignorelayout_1"></include>
+        <include layout="@layout/include_statuslayout"></include>
     </com.ethanco.varybuttondemo.VaryButtonLayout>
 	

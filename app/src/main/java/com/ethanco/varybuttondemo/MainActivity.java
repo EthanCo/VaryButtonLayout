@@ -16,14 +16,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         varyButton1 = (VaryButtonLayout) findViewById(R.id.varyButton1);
-        varyButton1.setOnVarayClickListener(new VaryButtonLayout.OnVaryClickListener() { // 回调监听
+        varyButton1.setOnVarayClickListener(new VaryButtonLayout.OnVaryClickListener() {
             @Override
-            public void onClick(View v, int currIndex) {
-                Toast.makeText(getApplicationContext(), "currIndex:" + currIndex, Toast.LENGTH_SHORT).show();
+            public void onClick(View v, int currIndex, int nextIndex) {
+                Toast.makeText(getApplicationContext(), "currIndex:" + currIndex + " nextIndex" + nextIndex, Toast.LENGTH_SHORT).show();
             }
         });
+        varyButton1.addStatusView(R.layout.status_item); //使用Java代码添加状态
 
         varyButton2 = (VaryButtonLayout) findViewById(R.id.varyButton2);
         varyButton2.setCurrSatus(2); //设置当前所处状态
+
     }
 }
