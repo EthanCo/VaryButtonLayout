@@ -11,12 +11,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 /**
+ * 具有多种状态的Layout
  * Created by YOLANDA on 2015-11-09.
  */
 public class VaryButtonLayout extends RelativeLayout implements View.OnClickListener {
 
     int currIndex = 0;
-    private boolean isChild;
+    private boolean isOneChildView;
 
     public VaryButtonLayout(Context context) {
         super(context);
@@ -46,7 +47,8 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
             throw new IndexOutOfBoundsException("length=" + getChildCount() + "; index=" + currIndex);
         }
         this.currIndex = currIndex;
-        getChildAt(currIndex).setVisibility(VISIBLE);
+        this.isOneChildView = false;
+        setCurrViewVisible();
     }
 
     public int getCurrSatus() {
@@ -78,7 +80,7 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
 
         int childCount = getChildCount();
         if (childCount == 1 && getChildAt(0) instanceof ViewGroup) {
-            isChild = true;
+            isOneChildView = true;
             ViewGroup viewGroup = (ViewGroup) getChildAt(0);
             initChildView(viewGroup, widthMeasureSpec, heightMeasureSpec);
         } else {
@@ -144,15 +146,21 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
     @Override
     public void onClick(View v) {
         Log.i("VaryButton", "2015-11-09-onClick: onCLick");
-        //getChildAt(currIndex).setVisibility(View.GONE);
-        if (isChild) {
+        setCurrViewVisible();
+
+        mVarayClickListener.onClick(this, currIndex);
+    }
+
+    /**
+     * 使现在的状态可见
+     */
+    private void setCurrViewVisible() {
+        if (isOneChildView) {
             ViewGroup childViewGroup = (ViewGroup) getChildAt(0);
             childViewGroup.getChildAt(circulateIndex(childViewGroup.getChildCount())).setVisibility(View.VISIBLE);
         } else {
             getChildAt(circulateIndex(getChildCount())).setVisibility(View.VISIBLE);
         }
-
-        mVarayClickListener.onClick(this, currIndex);
     }
 
     /**
