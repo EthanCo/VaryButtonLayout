@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "currIndex:" + currIndex + " nextIndex" + nextIndex, Toast.LENGTH_SHORT).show();
             }
         });
-        varyButton1.addStatusView(R.layout.status_item); //使用Java代码添加状态
+        //varyButton1.addStatusView(R.layout.status_item); //使用Java代码添加状态
 
         varyButton2 = (VaryButtonLayout) findViewById(R.id.varyButton2);
         varyButton2.setCurrSatus(2); //设置当前所处状态
