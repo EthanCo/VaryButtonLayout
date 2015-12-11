@@ -155,8 +155,8 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
         int originalIndex = currIndex;
         setCurrViewVisible();
 
-        if (mVarayClickListener != null) {
-            mVarayClickListener.onClick(this, originalIndex, currIndex);
+        if (mVaryClickListener != null) {
+            mVaryClickListener.onClick(this, originalIndex, currIndex);
         }
     }
 
@@ -189,10 +189,10 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
         void onClick(View v, int currIndex, int nextIndex);
     }
 
-    public void setOnVarayClickListener(OnVaryClickListener varyClickListener) {
-        this.mVarayClickListener = varyClickListener;
+    public void setOnVaryClickListener(OnVaryClickListener varyClickListener) {
+        this.mVaryClickListener = varyClickListener;
     }
 
-    public OnVaryClickListener mVarayClickListener;
+    public OnVaryClickListener mVaryClickListener;
 
 }

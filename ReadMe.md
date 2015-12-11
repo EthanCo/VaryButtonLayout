@@ -1,5 +1,5 @@
 ##VaryButtonLayout
-- 具有多种状态的Layout，内部的Button的形态具有高自由度
+- 具有多种状态的(Button)Layout，内部的Button的形态具有高自由度
 	- VaryButtonLayout只进行下一个状态的逻辑处理及实现button的点击回调
 
 ![VaryButtonLayout](http://img-storage.qiniudn.com/15-11-9/91983899.jpg)
