@@ -44,7 +44,7 @@
     varyButton1.addStatusView(new ImageView(this));
 ### 设置点击监听 ###
  	
-    varyButton1.setOnVarayClickListener(new VaryButtonLayout.OnVaryClickListener() {
+    varyButton1.setOnVaryClickListener(new VaryButtonLayout.OnVaryClickListener() {
 	    @Override
 	    public void onClick(View v, int currIndex, int nextIndex) {
 	        Toast.makeText(getApplicationContext(), "currIndex:" + currIndex + " nextIndex" + nextIndex, Toast.LENGTH_SHORT).show();
