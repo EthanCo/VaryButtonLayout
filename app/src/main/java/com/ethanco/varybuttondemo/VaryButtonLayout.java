@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 /**
@@ -16,6 +15,7 @@ import android.widget.RelativeLayout;
  * Created by YOLANDA on 2015-11-09.
  */
 public class VaryButtonLayout extends RelativeLayout implements View.OnClickListener {
+    private static final String TAG = "VaryButton";
 
     /**
      * 现在的状态
@@ -42,6 +42,7 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
     }
 
     private void init() {
+        setOnClickListener(this);
     }
 
     /**
@@ -77,6 +78,9 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
      * @param v
      */
     public void addStatusView(View v) {
+        RelativeLayout.LayoutParams lp = (LayoutParams) v.getLayoutParams();
+        lp.addRule(RelativeLayout.CENTER_IN_PARENT);
+        v.setLayoutParams(lp);
         addView(v);
     }
 
@@ -87,61 +91,23 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
         if (getChildCount() == 1 && getChildAt(0) instanceof ViewGroup) {
             isOneChildView = true;
             ViewGroup childViewGroup = (ViewGroup) getChildAt(0);
-            initChildView(childViewGroup, widthMeasureSpec, heightMeasureSpec);
+            initChildView(childViewGroup);
         } else {
-            initChildView(this, widthMeasureSpec, heightMeasureSpec);
+            initChildView(this);
         }
     }
 
-    private void initChildView(ViewGroup rootViewGroup, int widthMeasureSpec, int heightMeasureSpec) {
+    private void initChildView(ViewGroup rootViewGroup) {
         int childCount = rootViewGroup.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View childView = rootViewGroup.getChildAt(i);
-            fillParent(childView, widthMeasureSpec, heightMeasureSpec);
-            childView.setOnClickListener(this);
+            //fillParent(childView, widthMeasureSpec, heightMeasureSpec);
+            //当前控件跟随父控件的(点击、焦点等)状态
             childView.setDuplicateParentStateEnabled(true);
             if (i != currIndex) {
                 childView.setVisibility(View.GONE);
             }
         }
-    }
-
-    /**
-     * 将子布局大小填充满父布局
-     *
-     * @param childView
-     * @param widthMeasureSpec
-     * @param heightMeasureSpec
-     */
-    private void fillParent(View childView, int widthMeasureSpec, int heightMeasureSpec) {
-        int specWidth = MeasureSpec.getSize(widthMeasureSpec);
-        int specWidthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int specHeight = MeasureSpec.getSize(heightMeasureSpec);
-        int specHeightMode = MeasureSpec.getMode(heightMeasureSpec);
-        ViewGroup.LayoutParams layoutParams = childView.getLayoutParams();
-
-        float weight = 0;
-        int parentOrientation = -1;
-        //如果父布局是LinearLayout，进行weight的处理
-        if (getParent() != null && getParent() instanceof LinearLayout) {
-            LinearLayout parentLayout = (LinearLayout) getParent();
-            parentOrientation = parentLayout.getOrientation();
-            LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) this.getLayoutParams();
-            weight = ll.weight;
-        }
-
-        Log.i("VaryButton", "2015-11-09-fillParent: weight:" + weight);
-        if (specWidthMode != MeasureSpec.AT_MOST) {
-            if (weight == 0 && parentOrientation != LinearLayout.HORIZONTAL) {
-                layoutParams.width = specWidth;
-            }
-        }
-        if (specHeightMode != MeasureSpec.AT_MOST) {
-            if (weight == 0 && parentOrientation != LinearLayout.VERTICAL) {
-                layoutParams.height = specHeight;
-            }
-        }
-        childView.setLayoutParams(layoutParams);
     }
 
     @Override
@@ -151,7 +117,7 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        Log.i("VaryButton", "2015-11-09-onClick: onCLick");
+        Log.i(TAG, "onClick currIndex:" + currIndex);
         int originalIndex = currIndex;
         setCurrViewVisible();
 
@@ -194,5 +160,4 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
     }
 
     public OnVaryClickListener mVaryClickListener;
-
 }
