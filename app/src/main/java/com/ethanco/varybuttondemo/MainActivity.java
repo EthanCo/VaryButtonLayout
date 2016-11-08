@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         varyButton1 = (VaryButtonLayout) findViewById(R.id.varyButton1);
         varyButton4 = (VaryButtonLayout) findViewById(R.id.varyButton4);
-        varyButton1.setOnVaryClickListener(new VaryButtonLayout.OnVaryClickListener() {
+        varyButton1.addOnVaryClickListener(new VaryButtonLayout.OnVaryClickListener() {
             @Override
             public void onClick(View v, int currIndex, int nextIndex) {
                 Toast.makeText(getApplicationContext(), "currIndex:" + currIndex + " nextIndex" + nextIndex, Toast.LENGTH_SHORT).show();

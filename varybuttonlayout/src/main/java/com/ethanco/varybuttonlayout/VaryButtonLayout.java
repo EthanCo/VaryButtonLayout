@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 /**
  * 具有多种状态的Button
  * <p/>
@@ -120,9 +124,12 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
         Log.i(TAG, "onClick currIndex:" + currIndex);
         int originalIndex = currIndex;
         setCurrViewVisible();
+        onClick(originalIndex);
+    }
 
-        if (mVaryClickListener != null) {
-            mVaryClickListener.onClick(this, originalIndex, currIndex);
+    private void onClick(int originalIndex) {
+        for (OnVaryClickListener onVaryClickListener : mVaryClickListenerList) {
+            onVaryClickListener.onClick(this, originalIndex, currIndex);
         }
     }
 
@@ -179,9 +186,11 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
         void onClick(View v, int currIndex, int nextIndex);
     }
 
-    public void setOnVaryClickListener(OnVaryClickListener varyClickListener) {
-        this.mVaryClickListener = varyClickListener;
+    public void addOnVaryClickListener(OnVaryClickListener varyClickListener) {
+        if (!mVaryClickListenerList.contains(varyClickListener)) {
+            mVaryClickListenerList.add(varyClickListener);
+        }
     }
 
-    public OnVaryClickListener mVaryClickListener;
+    public List<OnVaryClickListener> mVaryClickListenerList = new ArrayList<>();
 }
