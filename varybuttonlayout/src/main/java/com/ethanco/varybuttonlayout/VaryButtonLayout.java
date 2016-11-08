@@ -132,10 +132,17 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
     private void setCurrViewVisible() {
         if (isOneChildView) {
             ViewGroup childViewGroup = (ViewGroup) getChildAt(0);
-            childViewGroup.getChildAt(circulateIndex(childViewGroup.getChildCount())).setVisibility(View.VISIBLE);
+            setCurrViewVisible(childViewGroup, circulateIndex(childViewGroup.getChildCount()));
         } else {
-            getChildAt(circulateIndex(getChildCount())).setVisibility(View.VISIBLE);
+            setCurrViewVisible(this, circulateIndex(getChildCount()));
         }
+    }
+
+    /**
+     * 使现在的状态可见
+     */
+    private void setCurrViewVisible(ViewGroup viewGroup, int index) {
+        viewGroup.getChildAt(index).setVisibility(View.VISIBLE);
     }
 
     /**
