@@ -1,4 +1,4 @@
-package com.ethanco.varybuttondemo;
+package com.ethanco.varybuttonlayout;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;

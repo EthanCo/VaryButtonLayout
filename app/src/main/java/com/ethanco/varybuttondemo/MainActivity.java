@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.ethanco.varybuttonlayout.VaryButtonLayout;
+
 public class MainActivity extends AppCompatActivity {
 
     private VaryButtonLayout varyButton1;
