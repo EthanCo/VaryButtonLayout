@@ -183,7 +183,7 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
     }
 
     public interface OnVaryClickListener {
-        void onClick(View v, int currIndex, int nextIndex);
+        void onClick(View v, int originalIndex, int currIndex);
     }
 
     public void addOnVaryClickListener(OnVaryClickListener varyClickListener) {

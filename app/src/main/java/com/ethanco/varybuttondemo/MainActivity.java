@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
         varyButton4 = (VaryButtonLayout) findViewById(R.id.varyButton4);
         varyButton1.addOnVaryClickListener(new VaryButtonLayout.OnVaryClickListener() {
             @Override
-            public void onClick(View v, int currIndex, int nextIndex) {
-                Toast.makeText(getApplicationContext(), "currIndex:" + currIndex + " nextIndex" + nextIndex, Toast.LENGTH_SHORT).show();
-                Log.i("Z-", "currIndex:" + currIndex + " nextIndex" + nextIndex);
-                varyButton4.setCurrSatus(currIndex);
+            public void onClick(View v, int originalIndex, int currIndex) {
+                Toast.makeText(getApplicationContext(), "originalIndex:" + originalIndex + " nextIndex" + currIndex, Toast.LENGTH_SHORT).show();
+                Log.i("Z-", "originalIndex:" + originalIndex + " nextIndex" + currIndex);
+                varyButton4.setCurrSatus(originalIndex);
             }
         });
         varyButton1.setCurrSatus(1);
