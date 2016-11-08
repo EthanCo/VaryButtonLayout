@@ -55,7 +55,7 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
             throw new IndexOutOfBoundsException("length=" + getChildCount() + "; index=" + currIndex);
         }
         this.currIndex = currIndex;
-        setCurrViewVisible();
+        setCurrViewVisible(currIndex);
     }
 
     public int getCurrSatus() {
@@ -139,7 +139,24 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
     }
 
     /**
-     * 使现在的状态可见
+     * 使现在的状态可见 (指定Index)
+     *
+     * @param index
+     */
+    private void setCurrViewVisible(int index) {
+        if (isOneChildView) {
+            ViewGroup childViewGroup = (ViewGroup) getChildAt(0);
+            setCurrViewVisible(childViewGroup, index);
+        } else {
+            setCurrViewVisible(this, index);
+        }
+    }
+
+    /**
+     * 使现在的状态可见 (指定ViewGroup和Index)
+     *
+     * @param viewGroup
+     * @param index
      */
     private void setCurrViewVisible(ViewGroup viewGroup, int index) {
         viewGroup.getChildAt(index).setVisibility(View.VISIBLE);
@@ -159,7 +176,7 @@ public class VaryButtonLayout extends RelativeLayout implements View.OnClickList
     }
 
     public interface OnVaryClickListener {
-        void onClick(View v, int originalIndex, int currIndex);
+        void onClick(View v, int currIndex, int nextIndex);
     }
 
     public void setOnVaryClickListener(OnVaryClickListener varyClickListener) {

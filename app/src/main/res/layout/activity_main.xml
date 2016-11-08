@@ -37,12 +37,38 @@
         </com.ethanco.varybuttonlayout.VaryButtonLayout>
 
         <com.ethanco.varybuttonlayout.VaryButtonLayout
+            android:id="@+id/varyButton4"
+            android:layout_width="100dp"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/img1_p" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/img1_30" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/img1_45" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/img1_60" />
+        </com.ethanco.varybuttonlayout.VaryButtonLayout>
+
+        <com.ethanco.varybuttonlayout.VaryButtonLayout
             android:id="@+id/varyButton2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
