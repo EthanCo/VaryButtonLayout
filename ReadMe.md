@@ -308,3 +308,5 @@ VaryButtonLayout的每一个子View，都是一种状态，而子view可以是�
         <include layout="@layout/include_statuslayout"></include>
     </com.ethanco.varybuttonlayout.VaryButtonLayout>
 	
+## VaryButtonLayoutPuppet ##
+自己不主动进行切换的VaryButtonLayout，需手动通过setCurrSatus()进行切换
